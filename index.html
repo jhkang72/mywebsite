@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Jihee Kang · Home</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Sora:wght@400;600&display=swap');
+
+  :root{
+    --ink:#0f172a; --muted:#475569;
+    --blue:#CFEFBA;            /* light blue bg */
+    --blue-ink:#7d82ba;
+    --yellow:#ffd84d; --yellow-200:#fff3b0;
+    --card:#ffffff; --radius:18px; --shadow:0 14px 36px rgba(15,23,42,.10);
+    --bg-intensity:.6;         /* fixed (no user control) */
+    --glow-enabled:1;          /* glow on */
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+
+  /* Make footer stick to bottom on short pages */
+  body{
+    margin:0;
+    font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Arial;
+    color:var(--ink);
+    background:var(--blue);
+    min-height:100vh;
+    display:flex;              /* NEW */
+    flex-direction:column;     /* NEW */
+    overflow-x:hidden;
+  }
+
+  /* Scroll-reactive glow */
+  .glow{
+    position:fixed; inset:-20vmax -20vmax auto auto; width:60vmax; height:60vmax; border-radius:50%;
+    background: radial-gradient(closest-side, rgba(255,216,77,var(--bg-intensity)), transparent 70%);
+    pointer-events:none; z-index:-1; filter:blur(30px); mix-blend-mode:multiply; opacity:var(--glow-enabled);
+  }
+
+  header{position:sticky; top:0; z-index:50; backdrop-filter:saturate(180%) blur(8px); background:rgba(255,255,255,.75); border-bottom:1px solid rgba(15,23,42,.06)}
+  .nav{max-width:1100px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; padding:14px 20px}
+  .brand{display:flex; align-items:center; gap:10px; font-weight:800}
+  .brand .dot{width:12px; height:12px; border-radius:999px; background:var(--yellow); box-shadow:0 0 0 4px rgba(255,216,77,.35)}
+  nav a{color:var(--muted); text-decoration:none; font-weight:700; margin-left:18px; padding:8px 12px; border-radius:12px}
+  nav a:hover,nav a:focus{background:rgba(255,216,77,.25)}
+
+  /* Main grows to push footer down */
+  main{flex:1}                 /* NEW */
+
+  .container{max-width:1100px; margin:0 auto; padding:48px 20px}
+  .hero{display:grid; grid-template-columns:1.2fr .8fr; gap:28px; align-items:center}
+
+  .badge{display:inline-flex; gap:8px; align-items:center; padding:8px 12px; background:#fff; border:1px solid rgba(15,23,42,.06); border-radius:999px; box-shadow:var(--shadow)}
+  .badge .spark{width:10px; height:10px; background:var(--yellow); border-radius:999px}
+
+  /* Headline uses Sora ONLY here */
+  h1{
+    font-family:'Sora', system-ui;   /* NEW */
+    font-size:80px; line-height:2.1; margin:14px 0 12px
+  }
+
+  .lede{font-size:18px; color:var(--muted); max-width:54ch}
+  .cta{margin-top:18px; display:flex; gap:12px; flex-wrap:wrap}
+  .btn{appearance:none; border:none; cursor:pointer; font-weight:800; border-radius:14px; padding:12px 16px; transition:transform .12s ease, box-shadow .12s ease}
+  .btn-primary{background:var(--blue-ink); color:#fff; box-shadow:0 10px 20px rgba(31,111,209,.35)}
+  .btn-primary:hover{transform:translateY(-1px)}
+  .btn-ghost{background:#fff; color:var(--blue-ink); border:2px solid var(--blue-ink)}
+
+  .heroCard{background:linear-gradient(145deg,#fff, #f7fbff); border:1px solid rgba(15,23,42,.06); border-radius:var(--radius); box-shadow:var(--shadow); padding:26px; position:relative; overflow:hidden}
+  .heroCard::after{content:""; position:absolute; right:-40px; top:-40px; width:180px; height:180px; border-radius:50%;
+    background:radial-gradient(var(--yellow), rgba(255,216,77,.25)); filter:blur(6px); opacity:.6}
+  .kv{margin:6px 0 0; padding-left:16px; color:var(--muted)}
+
+  footer{background:#0f172a; color:#e2e8f0}
+  .footer-inner{max-width:1100px; margin:0 auto; padding:28px 20px; display:flex; align-items:center; justify-content:space-between}
+  .link-strong{color:var(--blue-ink); font-weight:800; text-decoration:none}
+
+  @media (max-width:980px){.hero{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+  <div class="glow" id="glow"></div>
+
+  <header>
+    <div class="nav">
+      <div class="brand"><span class="dot"></span><span>Jihee Kang</span></div>
+      <nav>
+        <a href="index.html" style="background:rgba(255,216,77,.25)">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="container hero">
+      <div>
+        <span class="badge"><span class="spark"></span> Student @ NYU Abu Dhabi</span>
+        <h1>Jihee Kang</h1>
+        <p class="lede">Digital storyteller & content creator — YouTube · TikTok · Instagram</p>
+        <div class="cta">
+          <a class="btn btn-primary" href="projects.html">See my projects</a>
+          <a class="btn btn-ghost" href="about.html">About me</a>
+        </div>
+      </div>
+
+      <div class="heroCard" aria-label="Quick facts">
+        <h3 style="margin:0 0 10px">Quick facts</h3>
+        <ul class="kv">
+          <li>📍 Abu Dhabi | <a class="link-strong" href="https://www.linkedin.com/in/jihee-kang-877713295/" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li>📧 <a class="link-strong" href="mailto:jk9005@nyu.edu">jk9005@nyu.edu</a></li>
+          <li>☎︎ +971 058 580 2947</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div>© <span id="year"></span> Jihee Kang. All Rights Reserved.</div>
+    </div>
+  </footer>
+
+<script>
+  // Footer year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Subtle scroll-reactive glow (no user controls)
+  const glow = document.getElementById('glow');
+  function onScroll(){
+    const y = window.scrollY || 0;
+    glow.style.transform = `translate(${(y*0.15)}px, ${(y*0.25)}px)`;
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+</script>
+</body>
+</html>

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>About · Jihee Kang</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Sora:wght@400;600&display=swap');
+
+  :root{
+    --ink:#0f172a; --muted:#475569;
+    --blue:#CFEFBA;              /* softer pastel sky-blue */
+    --blue-ink:#7d82ba;
+    --yellow:#ffd84d; --yellow-soft:rgba(255,216,77,.6);
+    --card:#ffffff;
+    --radius:18px; --shadow:0 14px 36px rgba(15,23,42,.10);
+    --bg-intensity:.6; --glow-enabled:1;
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Arial;
+    color:var(--ink); background:var(--blue); min-height:100vh; overflow-x:hidden;
+  }
+
+  /* Scroll-reactive yellow glow */
+  .glow{
+    position:fixed; inset:auto -10vmax 10% auto; width:50vmax; height:50vmax; border-radius:50%;
+    background:radial-gradient(closest-side, rgba(255,216,77,var(--bg-intensity)), transparent 70%);
+    pointer-events:none; z-index:-1; filter:blur(30px); mix-blend-mode:multiply; opacity:var(--glow-enabled);
+  }
+
+  /* Header / Nav */
+  header{position:sticky; top:0; z-index:50; backdrop-filter:saturate(180%) blur(8px); background:rgba(255,255,255,.75); border-bottom:1px solid rgba(15,23,42,.06)}
+  .nav{max-width:1100px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; padding:14px 20px}
+  .brand{display:flex; align-items:center; gap:10px; font-weight:800}
+  .brand .dot{width:12px; height:12px; border-radius:999px; background:var(--yellow); box-shadow:0 0 0 4px rgba(255,216,77,.35)}
+  nav a{color:var(--muted); text-decoration:none; font-weight:700; margin-left:18px; padding:8px 12px; border-radius:12px}
+  nav a:hover,nav a:focus{background:rgba(255,216,77,.25)}
+  .container{max-width:1100px; margin:0 auto; padding:48px 20px}
+  .section-title{font-size:35px; margin:0 0 8px}
+  .section-sub{color:var(--muted); margin:0 0 28px}
+
+  /* Two-column: left sticky photo, right scroll content */
+  .about-wrap{display:grid; grid-template-columns:360px 1fr; gap:24px; align-items:start}
+  .photo-wrap{
+    position:sticky; top:96px;
+    background:linear-gradient(145deg, #fff, #f8fbff);
+    border:1px solid rgba(15,23,42,.06);
+    border-radius:24px; box-shadow:var(--shadow); overflow:hidden;
+  }
+  .photo-inner{position:relative}
+  .photo-wrap img{display:block; width:100%; height:auto; opacity:.99}
+
+  /* “Sticky tape” corners */
+  .tape{
+    position:absolute; width:80px; height:24px; background:var(--yellow);
+    opacity:.9; box-shadow:0 6px 16px rgba(0,0,0,.12);
+  }
+  .tape.tl{top:14px; left:14px; transform:rotate(-14deg)}
+  .tape.tr{top:14px; right:14px; transform:rotate(11deg)}
+  .tape.bl{bottom:14px; left:24px; width:70px; transform:rotate(7deg)}
+  .tape.br{bottom:18px; right:18px; width:64px; transform:rotate(-9deg)}
+  .tape::after{
+    content:""; position:absolute; inset:0;
+    background:repeating-linear-gradient(90deg, rgba(255,255,255,.35) 0 8px, transparent 8px 16px);
+    mix-blend-mode:overlay; opacity:.45;
+  }
+  /* optional soft yellow blobs behind image for playful vibe */
+  .blob{
+    position:absolute; border-radius:50%; z-index:-1; filter:blur(6px); opacity:.45;
+    background:radial-gradient(circle at 40% 40%, var(--yellow-soft), transparent 70%);
+  }
+  .blob.one{width:140px; height:140px; left:-24px; top:18%}
+  .blob.two{width:180px; height:180px; right:-30px; bottom:12%}
+
+  .right{display:grid; gap:18px; align-content:start}
+
+  /* Typography: Sora for the hero line and section labels */
+  .bio-lead{
+    font-family:'Sora', system-ui; font-size:22px; line-height:1.45; letter-spacing:.1px; margin:0 0 10px;
+  }
+  .para{margin:0; color:var(--muted)}
+  .label{
+    display:inline-block; font-family:'Sora', system-ui; font-weight:600;
+    font-size:16px; letter-spacing:.2px; color:#7a5b00;
+    background:rgba(255,216,77,.35); border:1px solid rgba(255,216,77,.6);
+    padding:6px 10px; border-radius:999px; margin:6px 0 12px;
+  }
+
+  .card{background:#fff; border:1px solid rgba(15,23,42,.06); border-radius:18px; box-shadow:var(--shadow); padding:22px}
+  .kv{margin:6px 0 0; padding-left:16px; color:var(--muted)}
+  .kv li{margin:6px 0}
+  .link{color:var(--blue-ink); font-weight:800; text-decoration:none}
+
+  /* Make role titles links + Sora font */
+  .role a{
+    font-family:'Sora', system-ui; font-weight:600; color:var(--blue-ink); text-decoration:none;
+  }
+  .role a:hover{ text-decoration:underline; }
+
+  footer{background:#0f172a; color:#e2e8f0}
+  .footer-inner{max-width:1100px; margin:0 auto; padding:28px 20px; display:flex; align-items:center; justify-content:space-between}
+
+  /* Theme control */
+  .theme-toggle{
+    position:fixed; right:12px; bottom:12px; background:#fff; border:1px solid rgba(15,23,42,.08);
+    box-shadow:var(--shadow); border-radius:16px; padding:12px; display:grid; gap:10px; width:260px; z-index:60
+  }
+  .theme-toggle h4{margin:0; font-size:14px}
+  .row{display:flex; align-items:center; justify-content:space-between; gap:12px; font-size:12px}
+  input[type=range]{width:140px}
+  label{user-select:none}
+
+  @media (max-width:980px){ .about-wrap{grid-template-columns:1fr} .photo-wrap{top:76px} }
+</style>
+</head>
+<body>
+  <div class="glow" id="glow"></div>
+
+  <header>
+    <div class="nav">
+      <div class="brand"><span class="dot"></span><span>Jihee Kang</span></div>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html" style="background:rgba(255,216,77,.25)">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h2 class="section-title">About me</h2>
+    <p class="section-sub"></p>
+
+    <div class="about-wrap">
+      <!-- LEFT: sticky photo with “tape” + playful blobs -->
+      <div class="photo-wrap">
+        <div class="photo-inner">
+          <!-- Replace with your actual photo path -->
+          <img src="assets/JiheePhoto.JPG" alt="Photo of Jihee Kang" />
+          <span class="tape tl" aria-hidden="true"></span>
+          <span class="tape tr" aria-hidden="true"></span>
+          <span class="tape bl" aria-hidden="true"></span>
+          <span class="tape br" aria-hidden="true"></span>
+          <span class="blob one" aria-hidden="true"></span>
+          <span class="blob two" aria-hidden="true"></span>
+        </div>
+      </div>
+
+      <!-- RIGHT: content with Sora section labels (no big headers) -->
+      <div class="right">
+        <div class="card">
+          <p class="bio-lead">I am a freshman at NYU Abu Dhabi, intending to major in Psychology.</p>
+          <p class="para">I am a student from South Korea who spent six years living in Singapore before moving back to Seoul, and am now studying in Abu Dhabi. I create vlogs and social media content on YouTube, TikTok, and Instagram that explore student life, life transitions, and personal growth. As a psychology student, I am interested in how people relate to stories and emotions, and incorporate my studies in the videos I film and edit. Through my awareness of digital trends, I aim to not just to present my experiences, but produce a narrative that engages diverse audiences and reaches other communities with similar backgrounds.
+          </p>
+
+          <div style="margin-top:12px">
+            <div class="label">Languages</div>
+            <ul class="kv"><li>Korean, English</li></ul>
+
+            <div class="label" style="margin-top:12px">Interests</div>
+            <ul class="kv"><li>Biking, Photography, Dance, Swimming, Running</li></ul>
+
+            <div class="label" style="margin-top:12px">Skills</div>
+            <ul class="kv"><li><strong>Computer:</strong> CapCut, VLLO, iMovie</li></ul>
+
+            <p style="margin-top:12px"><a class="link" href="assets/CV_Jihee Kang.pdf" target="_blank" rel="noopener">↗ View my CV (PDF)</a></p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="label">Education</div>
+          <p class="para"><strong>New York University Abu Dhabi</strong> — B.A. Psychology (Class of 2029)</p>
+          <ul class="kv"><li>Extracurriculars: Track & Field, NeuroAD</li></ul>
+        </div>
+
+        <div class="card">
+          <div class="label">Experience</div>
+          <ul class="kv">
+            <li class="role">
+              <a href="https://www.instagram.com/gwuohsglobalcafe/" target="_blank" rel="noopener">
+                Global Café — Chief Leader &amp; Social Media Manager
+              </a>
+              <div class="para">GWUOHS (Sep 2022 – Jun 2025) — Led Culture Union discussions with 80+ students from 15 nations; launched Instagram and raised attendance ~60% with 20+ promo posts.</div>
+            </li>
+            <li class="role" style="margin-top:10px">
+              <a href="https://www.youtube.com/@jiiheek" target="_blank" rel="noopener">
+                YouTube Creator
+              </a>
+              <div class="para">(Dec 2024 – Present) — 30+ videos; 37,031 total views; 38+ hours average watch time through title/thumbnail strategies.</div>
+            </li>
+            <li class="role" style="margin-top:10px">
+              <a href="https://www.tiktok.com/@jaihohee" target="_blank" rel="noopener">
+                TikTok Creator
+              </a>
+              <div class="para">(Aug 2025 – Present) — 800+ followers first month; viral posts (77.7K / 14.1K / 10.7K); 7,300+ likes.</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div>© <span id="year"></span> Jihee Kang. All Rights Reserved.</div>
+    </div>
+  </footer>
