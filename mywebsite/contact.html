@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Contact · Jihee Kang</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Sora:wght@400;600&display=swap');
+  :root{
+    --ink:#0f172a; --muted:#475569;
+    --blue:#CFEFBA; --blue-ink:#7d82ba;
+    --yellow:#ffd84d;
+    --card:#fff;
+    --radius:18px; --shadow:0 14px 36px rgba(15,23,42,.10);
+    --bg-intensity:.6; --glow-enabled:1;
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Arial;
+    color:var(--ink);
+    background:var(--blue);
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    overflow-x:hidden;
+  }
+
+  .glow{
+    position:fixed; inset:auto -12vmax 15% auto; width:50vmax; height:50vmax; border-radius:50%;
+    background: radial-gradient(closest-side, rgba(255,216,77,var(--bg-intensity)), transparent 70%);
+    pointer-events:none; z-index:-1; filter:blur(30px); mix-blend-mode:multiply; opacity:var(--glow-enabled);
+  }
+
+  header{position:sticky; top:0; z-index:50; backdrop-filter:saturate(180%) blur(8px); background:rgba(255,255,255,.75); border-bottom:1px solid rgba(15,23,42,.06)}
+  .nav{max-width:1100px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; padding:14px 20px}
+  .brand{display:flex; align-items:center; gap:10px; font-weight:800}
+  .brand .dot{width:12px; height:12px; border-radius:999px; background:var(--yellow); box-shadow:0 0 0 4px rgba(255,216,77,.35)}
+  nav a{color:var(--muted); text-decoration:none; font-weight:700; margin-left:18px; padding:8px 12px; border-radius:12px}
+  nav a:hover,nav a:focus{background:rgba(255,216,77,.25)}
+
+  main{flex:1}
+
+  .container{max-width:1100px; margin:0 auto; padding:48px 20px}
+
+  /* ✅ Center only the title and subtitle */
+  .section-title{
+    font-size:35px;
+    margin:0 0 8px;
+    text-align:center;
+  }
+  .section-sub{
+    color:var(--muted);
+    margin:0 0 28px;
+    text-align:center;
+  }
+
+  /* Keep contact info left-aligned */
+  .card{
+    background:#fff;
+    border:1px solid rgba(15,23,42,.06);
+    border-radius:18px;
+    box-shadow:var(--shadow);
+    padding:22px;
+    display:grid;
+    gap:14px;
+    max-width:700px;
+    margin:0 auto; /* center card horizontally but keep inner content left-aligned */
+  }
+
+  .contact-row{display:flex; gap:12px; align-items:center; flex-wrap:wrap}
+  .chip{
+    display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:999px;
+    background:linear-gradient(145deg,#fff,#f8faff); border:1px solid rgba(15,23,42,.08);
+  }
+  .chip a{color:var(--blue-ink); font-weight:800; text-decoration:none}
+  .chip .emoji{font-size:18px}
+
+  footer{background:#0f172a; color:#e2e8f0}
+  .footer-inner{max-width:1100px; margin:0 auto; padding:28px 20px; display:flex; align-items:center; justify-content:space-between}
+</style>
+</head>
+<body>
+  <div class="glow" id="glow"></div>
+
+  <header>
+    <div class="nav">
+      <div class="brand"><span class="dot"></span><span>Jihee Kang</span></div>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="contact.html" style="background:rgba(255,216,77,.25)">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h2 class="section-title">Contact</h2>
+    <p class="section-sub">You can find me at:</p>
+
+    <div class="card">
+      <div class="contact-row">
+        <span class="chip"><span class="emoji">📧</span><a href="mailto:kelly.jihee.kang@gmail.com">kelly.jihee.kang@gmail.com</a></span>
+      </div>
+      <div class="contact-row">
+        <span class="chip"><span class="emoji">🔗</span><a href="https://www.linkedin.com/in/jihee-kang-877713295/" target="_blank" rel="noopener">LinkedIn</a></span>
+      </div>
+      <div class="contact-row">
+        <span class="chip"><span class="emoji">📱</span>+971 058 580 2947</span>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div>© <span id="year"></span> Jihee Kang. All Rights Reserved.</div>
+    </div>
+  </footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  const glow = document.getElementById('glow');
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY || 0;
+    glow.style.transform = `translate(${(y*0.10)}px, ${(y*0.16)}px)`;
+  }, {passive:true});
+</script>
+</body>
+</html>
